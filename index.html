@@ -64,11 +64,13 @@
         <ul class="space-y-4">
           <li
             class="flex justify-between items-center bg-gray-50 p-4 rounded-lg shadow-sm"
+            v-for="contact in contactsList"
+            :key="contact.id"
           >
             <div>
-              <p class="text-lg font-semibold">Name</p>
-              <p class="text-gray-600">phone</p>
-              <p class="text-gray-600">email</p>
+              <p class="text-lg font-semibold">{{ contact.name }}</p>
+              <p class="text-gray-600">{{ contact.phone }}</p>
+              <p class="text-gray-600">{{ contact.email }}</p>
             </div>
             <div class="flex space-x-2">
               <button
