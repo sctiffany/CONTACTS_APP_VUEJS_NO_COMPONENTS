@@ -117,6 +117,9 @@
         methods: {
           addOne() {
             this.contactsList.push({ ...this.inputContact });
+            this.inputContact.name = "";
+            this.inputContact.phone = "";
+            this.inputContact.email = "";
           },
         },
         watch: {
