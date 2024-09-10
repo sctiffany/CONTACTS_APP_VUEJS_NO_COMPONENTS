@@ -42,12 +42,22 @@
             v-model="inputContact.email"
           />
         </div>
-        <button
-          class="w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-md"
-          @click.prevent="addOne()"
-        >
-          Ajouter/Modifier le contact
-        </button>
+        <template v-if="!isEditing">
+          <button
+            class="w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-md"
+            @click.prevent="addOne()"
+          >
+            Ajouter le contact
+          </button>
+        </template>
+        <template v-else>
+          <button
+            class="w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-md"
+            @click.prevent="updateOneById(inputContact.id)"
+          >
+            Modifier le contact
+          </button>
+        </template>
       </aside>
 
       <!-- Section droite pour la liste des contacts -->
@@ -79,6 +89,7 @@
             <div class="flex space-x-2">
               <button
                 class="bg-yellow-400 hover:bg-yellow-500 text-white font-bold py-2 px-4 rounded-md"
+                @click.prevent="editOneById(contact.id)"
               >
                 Modifier
               </button>
@@ -111,24 +122,38 @@
           return {
             contactsList:
               JSON.parse(localStorage.getItem("contactsList")) || [],
-            inputContact: { id: Date.now(), name: "", phone: null, email: "" },
+            inputContact: { id: null, name: "", phone: null, email: "" },
+            isEditing: false,
           };
         },
         methods: {
           addOne() {
+            this.inputContact.id = Date.now();
             this.contactsList.push({ ...this.inputContact });
+            this.inputContact.id = null;
             this.inputContact.name = "";
             this.inputContact.phone = "";
             this.inputContact.email = "";
+          },
+          editOneById(id) {
+            this.inputContact = {
+              ...this.contactsList.find(
+                // contact = nom du tiroir dans lequel on va chercher l'info (peut s'appeler turlututu)
+                (contact) => contact.id === id
+              ),
+            };
+            this.isEditing = true;
+          },
+          updateOneById(id) {
+            this.contactsList[
+              this.contactsList.findIndex((item) => item.id == id)
+            ] = { ...this.inputContact };
           },
         },
         watch: {
           contactsList: {
             handler(newValue, oldValue) {
-              localStorage.setItem(
-                "contactsList",
-                JSON.stringify(this.contactsList)
-              );
+              localStorage.setItem("contactsList", JSON.stringify(newValue));
             },
             deep: true,
           },
