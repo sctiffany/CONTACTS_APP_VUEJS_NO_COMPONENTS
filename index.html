@@ -90,9 +90,33 @@
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
 
     <script>
+      // Initialisation du localStorage
+      /*localStorage.contactsList = JSON.stringify([
+        {
+          id: Date.now(),
+          name: "Tiffany Schinelli",
+          phone: "123456789",
+          email: "tiffany.schinelli@gmail.com",
+        },
+      ]);*/
+
       Vue.createApp({
         data() {
-          return {};
+          return {
+            contactsList:
+              JSON.parse(localStorage.getItem("contactsList")) || [],
+          };
+        },
+        watch: {
+          contactsList: {
+            handler(newValue, oldValue) {
+              localStorage.setItem(
+                "contactsList",
+                JSON.stringify(this.contactsList)
+              );
+            },
+            deep: true,
+          },
         },
       }).mount("#app");
     </script>
