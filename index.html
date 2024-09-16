@@ -95,6 +95,7 @@
               </button>
               <button
                 class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-md"
+                @click.prevent="deleteOneById(contact.id)"
               >
                 Supprimer
               </button>
@@ -153,6 +154,11 @@
             this.inputContact.name = "";
             this.inputContact.phone = "";
             this.inputContact.email = "";
+          },
+          deleteOneById(id) {
+            this.contactsList = this.contactsList.filter(
+              (contact) => contact.id !== id
+            );
           },
         },
         watch: {
