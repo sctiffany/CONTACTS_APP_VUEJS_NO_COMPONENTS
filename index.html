@@ -108,6 +108,7 @@
 
     <script>
       // Initialisation du localStorage
+      // composeur, twig, moustache
       /*localStorage.contactsList = JSON.stringify([
         {
           id: Date.now(),
@@ -148,6 +149,10 @@
             this.contactsList[
               this.contactsList.findIndex((item) => item.id == id)
             ] = { ...this.inputContact };
+            this.inputContact.id = null;
+            this.inputContact.name = "";
+            this.inputContact.phone = "";
+            this.inputContact.email = "";
           },
         },
         watch: {
