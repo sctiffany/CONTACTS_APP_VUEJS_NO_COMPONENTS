@@ -28,24 +28,18 @@
    Détails : Lorsqu’un utilisateur clique sur "Delete", supprimer le contact correspondant à l’id donné de la liste contacts et du localStorage.
    Nom de commit : feat: delete contact by id
 
-6. Gestion du mode ajout/modification par id
-   Objectif : Gérer l’ajout et la modification de contacts avec distinction selon l’état (ajout ou édition).
-   Méthodes : addOne() et updateOneById(id)
-   Détails : Si un contact est en mode édition (grâce à isEditing), utiliser updateOneById(id) pour mettre à jour le contact, sinon utiliser addOne() pour en créer un nouveau avec un id unique.
-   Nom de commit : feat: toggle between add and edit modes for contacts
-
-7. Mise en place du watcher pour la sauvegarde automatique
+6. Mise en place du watcher pour la sauvegarde automatique
    Objectif : Mettre en place un watcher profond pour sauvegarder automatiquement les modifications dans le localStorage.
    Détails : Surveiller les changements dans contacts et mettre à jour automatiquement le localStorage à chaque modification.
    Nom de commit : feat: implement deep watcher for automatic localStorage sync
 
-8. Tri des contacts par ordre alphabétique (nom)
+7. Tri des contacts par ordre alphabétique (nom)
    Objectif : Trier les contacts par ordre alphabétique avant de les afficher.
    Méthode : sortContacts()
    Détails : Trier la liste des contacts par nom avant de les afficher à l’utilisateur. Utiliser une propriété calculée pour garantir que le tri est toujours actif.
    Nom de commit : feat: sort contacts alphabetically by name
 
-9. Recherche et filtrage des contacts par id
+8. Recherche et filtrage des contacts par id
    Objectif : Filtrer les contacts affichés en fonction de la recherche par nom, téléphone ou email.
    Computed property : filteredContacts()
    Détails : Utiliser la propriété searchQuery pour filtrer les contacts dont le nom, le téléphone ou l’email contient la chaîne de recherche. Utiliser l’id pour identifier chaque contact dans la liste affichée.
